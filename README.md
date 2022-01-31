@@ -7,4 +7,4 @@
 
 ## Available Notes
 
-- S&DS 410&610 Statistical Inference (2021 Fall, Zhou Fan).
+- S&DS 410/610 Statistical Inference (2021 Fall, Zhou Fan).
