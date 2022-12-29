@@ -1,16 +1,19 @@
 \documentclass[a4paper]{article}
 
 \def\npart {S\&DS 410/610}
-\def\nyear {2021}
-\def\nterm {Fall}
 \def\nlecturer {Zhou Fan}
 \def\ncourse {Statistical Inference}
+\def\nauthor{Leqi Xu \footnote{If you find any typos, please email them to leqi.xu@yale.edu. Many thanks to Tianyu Liu for pointing out previous typos.}}
+\def\nyear {2021}
+\def\nterm {Fall}
 \def\nofficial {http://www.stat.yale.edu/~zf59/stats_410_610/schedule.html}
 
 \input{header}
 
 \begin{document}
-	\maketitle	
+	\maketitle
+
+\section*{Main Topics in Statistical Inference}
 
 {	\noindent\textbf{Unit I: Finite sample theory}
 	
@@ -459,7 +462,7 @@ In this case, $\mu$ is called the \emph{Lebesgue measure} on $\mathcal{X}$.
 	For $N(\mu, {\sigma}^2)$ model, $\theta = (\mu, {\sigma}^2) \in \mathbb{R} \times (0, \infty)$, densities:
 	\begin{equation*}
 		\begin{aligned}
-			p_{\theta} (x) &= \frac{1}{\sqrt{2 \pi {\sigma}^2}} \exp \left(- \frac{{x - \mu}^2}{2 {\sigma}^2}\right) \\
+			p_{\theta} (x) &= \frac{1}{\sqrt{2 \pi {\sigma}^2}} \exp \left(- \frac{(x - \mu)^2}{2 {\sigma}^2}\right) \\
 			&= \exp\left(-\frac{1}{2{\sigma}^2} x^2 + \frac{\mu}{{\sigma}^2}x - \frac{{\mu}^2}{2 {\sigma}^2} - \frac{1}{2} \log (2 \pi {\sigma}^2)\right).
 		\end{aligned}
 	\end{equation*}
@@ -510,7 +513,7 @@ This is called \emph{canonical form}. $A(\eta)$ is the \emph{log-partition funct
 \end{eg}
 
 \begin{eg}
-	Multinomial($n; p_0, p_1, \cdots, p_s$) model on $s+1$ possible outcomes. Here, $\mathcal{X} = \left\{(x_0, x_1, \cdots, x_s): 0 \leq x_0 \leq x_1, \cdots, x_s \leq n, \sum\limits_{i = 0}^s = n\right\}, \theta = (p_0, p_1, \cdots, p_s)$, then
+	Multinomial($n; p_0, p_1, \cdots, p_s$) model on $s+1$ possible outcomes. Here, $\mathcal{X} = \left\{(x_0, x_1, \cdots, x_s): 0 \leq x_0 \leq x_1, \cdots, x_s \leq n, \sum\limits_{i = 0}^s x_i = n\right\}, \theta = (p_0, p_1, \cdots, p_s)$, then
 	\begin{equation}
 		\begin{aligned}
 			p_{\theta} (x) &= \binom{n}{x_0, x_1, \cdots, x_s} p_0^{x_0} p_1^{x_1} \cdots p_s^{x_s} \\
@@ -542,8 +545,31 @@ This is called \emph{canonical form}. $A(\eta)$ is the \emph{log-partition funct
 	So $\Xi = (0, \infty) \times (\infty,0).$
 \end{eg}
 
+
+\begin{note*} There are three important inequalities that we can use in the proof:
+\begin{itemize}
+	\item Cauchy-Schwarz inequality: Let $\mu$ be the probability measure, $f,g: R \rightarrow R$:
+	\begin{equation*}
+	\begin{aligned}
+		& \int f(x) g(x) d \mu(x) \leq\left[\int f(x)^{2} d \mu(x)\right]^{1 / 2}\left[\int g(x)^{2} d \mu(x)\right]^{1 / 2}. \\        & \E[f(x) g(x)] \leq \sqrt{\E\left(f(x)^{2}\right)} \sqrt{\E\left(g(x)^{2}\right)}.	
+	\end{aligned}
+	\end{equation*}	
+	\item Hölder's inequality: for any measure $\upsilon$, any non-negative functions $f,g: \mathcal{X} \to [0,\infty)$, and any $\alpha,\beta > 1$ such that $\frac{1}{\alpha}+\frac{1}{\beta} = 1$, then
+	\begin{equation*}
+		\int f(x)g(x) \d \upsilon (x) \leq \left(\int {f(x)}^{\alpha} \d \upsilon\right)^{\frac{1}{\alpha}}\left(\int {g(x)}^{\beta} \d \upsilon\right)^{\frac{1}{\beta}}.
+	\end{equation*}	
+	\item Jensen’s inequality: Let $\mu$ be the probability measure, for a random variable $X$ and a convex function $f: R \rightarrow R$: 
+	\begin{equation*}
+	\begin{aligned}
+		& f \left(\int x d \mu(x) \right) \leq \int f(x) d \mu(x). \\
+		& f \left(\E [X] \right) \leq \E[ f \left( X \right)].
+	\end{aligned}
+	\end{equation*}	
+\end{itemize}
+\end{note*}
+
 \begin{prop}
-	The natural parameter space $\Xi$ is alwasy convex.
+	The natural parameter space $\Xi$ is always convex.
 \end{prop}
 
 \begin{proof}
@@ -562,8 +588,8 @@ This is called \emph{canonical form}. $A(\eta)$ is the \emph{log-partition funct
 		\begin{aligned}
 			&\int \exp \left(\sum\limits_{i = 1}^s(\lambda \eta_i + (1-\lambda) \eta_i')T_i (x)\right)h(x) \d \mu (x) \\
 			&= \int f(x)g(x) \d \upsilon (x) \\
-			&\leq \left(\int {f(x)}^{\alpha} \d \upsilon\right)^{\frac{1}{\alpha}}\left(\int {g(x)}^{\beta} \d \upsilon\right)^{\frac{1}{\beta}} \\
-			&= \left(\int \exp\left(\sum\limits_{i = 1}^s \lambda \eta_i T_i(x)\right) h(x) \d \mu (x)\right)^{\lambda} \left(\int \exp\left(\sum\limits_{i = 1}^s (1 - \lambda)\eta_i' T_i (x)\right) h(x) \d \mu (x)\right)^{1 - \lambda} \\
+			& \leq \left(\int {f(x)}^{\alpha} \d \upsilon\right)^{\frac{1}{\alpha}}\left(\int {g(x)}^{\beta} \d \upsilon\right)^{\frac{1}{\beta}} \\
+			&= \left(\int \exp\left(\sum\limits_{i = 1}^s \eta_i T_i(x)\right) h(x) \d \mu (x)\right)^{\lambda} \left(\int \exp\left(\sum\limits_{i = 1}^s \eta_i' T_i (x)\right) h(x) \d \mu (x)\right)^{1 - \lambda} \\
 			&< \infty.
 		\end{aligned}
 	\end{equation}
@@ -592,7 +618,7 @@ This is called \emph{canonical form}. $A(\eta)$ is the \emph{log-partition funct
 		\begin{aligned}
 			&A(\lambda \eta + (1-\lambda) \eta') \\
 			&= \log\left[\int \exp \left(\sum\limits_{i = 1}^s(\lambda \eta_i + (1-\lambda) \eta_i')T_i (x)\right)h(x) \d \mu (x)\right] \\
-			&\leq \log\left[\left(\int \exp\left(\sum\limits_{i = 1}^s \lambda \eta_i T_i(x)\right) h(x) \d \mu (x)\right)^{\lambda} \left(\int \exp\left(\sum\limits_{i = 1}^s (1 - \lambda)\eta_i' T_i (x)\right) h(x) \d \mu (x)\right)^{1 - \lambda}\right] \\
+			&\leq \log\left[\left(\int \exp\left(\sum\limits_{i = 1}^s \eta_i T_i(x)\right) h(x) \d \mu (x)\right)^{\lambda} \left(\int \exp\left(\sum\limits_{i = 1}^s \eta_i' T_i (x)\right) h(x) \d \mu (x)\right)^{1 - \lambda}\right] \\
 			&= \lambda A(\eta) + (1-\lambda) A(\eta').
 		\end{aligned}
 	\end{equation}
@@ -720,7 +746,7 @@ Here, $e^{A(\eta)} = \int \exp\left(\sum\limits_{i=1}^s \eta_i(\theta)T_i(x)-b(\
 		\end{equation*}
 		For all  $t \in\mathbb{R}, \abs{h} \leq \epsilon$, we have
 		\begin{equation*}
-			\abs{\frac{e^{ht}-1}{h}} \leq \frac{e^{\epsilon\abs{t}}-1}{\epsilon} \leq \frac{e^{\epsilon\abs{t}}}{\epsilon} \leq \frac{e^{\epsilon t} + e^{\epsilon -t}}{\epsilon}.
+			\abs{\frac{e^{ht}-1}{h}} \leq \frac{e^{\epsilon\abs{t}}-1}{\epsilon} \leq \frac{e^{\epsilon\abs{t}}}{\epsilon} \leq \frac{e^{\epsilon t} + e^{-\epsilon t}}{\epsilon}.
 		\end{equation*}
 		Let $g(t) = \frac{1}{\epsilon} e^{ut}(e^{\epsilon t}+e^{-\epsilon t})$, for fixed $\epsilon < \delta - \abs{u}$. By assumption,
 		\begin{equation*}
@@ -1474,7 +1500,7 @@ Many papers devoted to studying properties or behavior of log-partition function
 	\begin{equation}
 		r(\Lambda,\delta_{\Lambda}) \leq r(\Lambda,\delta).
 	\end{equation}
-	For uniqueness: Suppose $\delta_{\Lambda}'(x) \neq \delta_{\Lambda}(x)$ for any $x \in S$, where $P^X(S)=0$. L is strictly convex implies that if $\delta_{\Lambda}(x)$ minimizes $\mathbb{E}[L(\Theta,\delta(X))|X=x]$, then it is the unique statistic for minimization. Therefore,
+	For uniqueness: Suppose $\delta_{\Lambda}'(x) \neq \delta_{\Lambda}(x)$ for any $x \in S$, where $P^X(S) > 0$. L is strictly convex implies that if $\delta_{\Lambda}(x)$ minimizes $\mathbb{E}[L(\Theta,\delta(X))|X=x]$, then it is the unique statistic for minimization. Therefore,
 	\begin{equation}
 		\mathbb{E}[L(\Theta,\delta_{\Lambda}(X))|X=x] < \mathbb{E}[L(\Theta,\delta_{\Lambda}'(X))|X=x] \quad \text{for } \ x \in S.
 	\end{equation}
@@ -2378,7 +2404,7 @@ It's possible that both $\delta_1$ and $\delta_2$ are minimax, but $\delta_1$ he
 	R(\theta,\delta) = \mathbb{E}_\theta[\Vert \theta - X \Vert ^2] = d \sigma^2.
 \end{equation}
 \newline
-\textbf{Bayesian analysis:} Suppose $\Theta \sim N(\tau^2 I) \equiv \Lambda$. Then $\theta_1,\theta_2,\cdots,\theta_d$  are independent, $X_1, X_2, \cdots, X_d$ are independent. So
+\textbf{Bayesian analysis:} Suppose $\Theta \sim N(0, \tau^2 I) \equiv \Lambda$. Then $\theta_1,\theta_2,\cdots,\theta_d$  are independent, $X_1, X_2, \cdots, X_d$ are independent. So
 \begin{equation*}
 	\begin{aligned}
 		& \pi(\theta) = \prod\limits_{i=1}^d \frac{1}{\sqrt{2\pi\tau^2}} e^{-\frac{\theta_i^2}{2\tau^2}}, \quad \pi(x|\theta) = \prod\limits_{i=1}^d \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \theta_i)^2}{2\sigma^2}}.\\
@@ -2411,7 +2437,7 @@ Here, $\Lambda_i = N(0,\sigma^2)$ is the prior distribution for $\theta_i$. This
 
 \begin{center}
 	\begin{tikzpicture}
-		\draw [->] (-3, 0) -- (3, 0) node [right] {$\Vert \theta \Vert$};
+		\draw [->] (-3, 0) -- (3, 0) node [right] {$\theta$};
 		\draw [->] (0, -0.5) -- (0, 3) node [above] {Risk};
 		
 		\draw [mblue, semithick, domain=-2:2] plot (\x, 1.5) node [right] {$R(\theta,X)$};
@@ -2439,7 +2465,7 @@ Note: $\delta^{\text{IS}}(x)$ is not a true estimator, it requires ``oracle" kno
 
 \begin{center}
 	\begin{tikzpicture}
-		\draw [->] (-4, 0) -- (4, 0) node [right] {$\Vert \theta \Vert$};
+		\draw [->] (-4, 0) -- (4, 0) node [right] {$\theta $};
 		\draw [->] (0, -1) -- (0, 2.5) node [above] {Risk};
 		
 		\draw [mblue, semithick, domain=-3:3] plot (\x, 1.5) node [above] {$R(\theta,X)$};
@@ -5583,7 +5609,7 @@ There is no closed-form expression for $\hat{\theta}_n = (\hat{a}_n,\hat{b}_n)$.
 \noindent \textbf{Interpretation:} This is an information theoretic lower bound for the variance achievable by \emph{any} unbiased estimaotr. And for the MLE $\hat{\theta}_n$ of $\theta$, as $n \to \infty$,
 \begin{equation*}
 	\begin{aligned}
-		& \sqrt{\theta} (\hat{\theta}_n - \theta) \stackrel{\text{d}}{\longrightarrow} N \left(0,I(\theta)^{-1}\right). \\
+		& \sqrt{n} (\hat{\theta}_n - \theta) \stackrel{\text{d}}{\longrightarrow} N \left(0,I(\theta)^{-1}\right). \\
 		& \hat{\theta}_n \approx N\left(\theta,\frac{1}{n} \cdot I(\theta)^{-1}\right).
 	\end{aligned}
 \end{equation*} 
@@ -7656,5 +7682,7 @@ The asymptotic risk achievable by an estimate $\delta_n$ is $\frac{1}{n}$ times 
 		\end{equation*}
 	\end{enumerate}	
 \end{proof}
+
 \printindex
+
 \end{document}
