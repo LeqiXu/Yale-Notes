@@ -3,7 +3,7 @@
 \def\npart {S\&DS 410/610}
 \def\nlecturer {Zhou Fan}
 \def\ncourse {Statistical Inference}
-\def\nauthor{Leqi Xu \footnote{If you find any typos, please email them to leqi.xu@yale.edu. Many thanks to Tianyu Liu for pointing out previous typos.}}
+\def\nauthor{Leqi Xu \footnote{If you find any typos, please email them to leqi.xu@yale.edu. Many thanks to Tianyu Liu, Xuankai Wang for pointing out previous typos.}}
 \def\nyear {2021}
 \def\nterm {Fall}
 \def\nofficial {http://www.stat.yale.edu/~zf59/stats_410_610/schedule.html}
@@ -132,7 +132,7 @@
 \end{answer*}
 
 \begin{defi*}
-	A \emph{statistical model} is a family of probability distributions $p$ over a sample space $\mathcal{X}$. Most of this class index $p$ by a \emph{parameter} $\theta$ belonging to a parameter space $\Omega: \mathcal{P} = \{P_{\theta} \in \Omega \}$.
+	A \emph{statistical model} is a family of probability distributions $P$ over a sample space $\mathcal{X}$. Most of this class index $P$ by a \emph{parameter} $\theta$ belonging to a parameter space $\Omega: \mathcal{P} = \{P_{\theta}: \theta \in \Omega \}$.
 \end{defi*}
 
 \noindent \textbf{Goal:} Use data from $p_{\theta}$ to draw conclusions about $\theta$.
@@ -551,7 +551,8 @@ This is called \emph{canonical form}. $A(\eta)$ is the \emph{log-partition funct
 	\item Cauchy-Schwarz inequality: Let $\mu$ be the probability measure, $f,g: R \rightarrow R$:
 	\begin{equation*}
 	\begin{aligned}
-		& \int f(x) g(x) d \mu(x) \leq\left[\int f(x)^{2} d \mu(x)\right]^{1 / 2}\left[\int g(x)^{2} d \mu(x)\right]^{1 / 2}. \\        & \E[f(x) g(x)] \leq \sqrt{\E\left(f(x)^{2}\right)} \sqrt{\E\left(g(x)^{2}\right)}.	
+		& \int f(x) g(x) d \mu(x) \leq\left[\int f(x)^{2} d \mu(x)\right]^{1 / 2}\left[\int g(x)^{2} d \mu(x)\right]^{1 / 2}. \\
+        & \E[f(x) g(x)] \leq \sqrt{\E\left(f(x)^{2}\right)} \sqrt{\E\left(g(x)^{2}\right)}.	
 	\end{aligned}
 	\end{equation*}	
 	\item Hölder's inequality: for any measure $\upsilon$, any non-negative functions $f,g: \mathcal{X} \to [0,\infty)$, and any $\alpha,\beta > 1$ such that $\frac{1}{\alpha}+\frac{1}{\beta} = 1$, then
